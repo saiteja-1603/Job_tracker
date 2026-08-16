@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+
+{% block content %}
+
+<h2>Dashboard</h2>
+
+<p>
+    Welcome, {{ session.get('user_name') }}
+</p>
+
+
+<hr>
+
+
+<h3>Application Statistics</h3>
+
+<p>
+    Total Applications:
+    <strong>{{ total_applications }}</strong>
+</p>
+
+<p>
+    Applied:
+    <strong>{{ status_counts.get('Applied', 0) }}</strong>
+</p>
+
+<p>
+    Under Review:
+    <strong>{{ status_counts.get('Under Review', 0) }}</strong>
+</p>
+
+<p>
+    Shortlisted:
+    <strong>{{ status_counts.get('Shortlisted', 0) }}</strong>
+</p>
+
+<p>
+    Interview:
+    <strong>{{ status_counts.get('Interview', 0) }}</strong>
+</p>
+
+<p>
+    Selected:
+    <strong>{{ status_counts.get('Selected', 0) }}</strong>
+</p>
+
+<p>
+    Rejected:
+    <strong>{{ status_counts.get('Rejected', 0) }}</strong>
+</p>
+
+<p>
+    Withdrawn:
+    <strong>{{ status_counts.get('Withdrawn', 0) }}</strong>
+</p>
+
+
+<hr>
+
+
+<h3>Recent Applications</h3>
+
+{% if recent_applications %}
+
+<table border="1" cellpadding="8">
+
+    <tr>
+
+        <th>Company</th>
+        <th>Role</th>
+        <th>Type</th>
+        <th>Location</th>
+        <th>Date</th>
+        <th>Status</th>
+
+    </tr>
+
+
+    {% for application in recent_applications %}
+
+    <tr>
+
+        <td>
+            {{ application.company_name }}
+        </td>
+
+        <td>
+            {{ application.job_role }}
+        </td>
+
+        <td>
+            {{ application.job_type or '-' }}
+        </td>
+
+        <td>
+            {{ application.location or '-' }}
+        </td>
+
+        <td>
+            {{ application.application_date }}
+        </td>
+
+        <td>
+            {{ application.status }}
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% else %}
+
+<p>
+    No applications found.
+</p>
+
+{% endif %}
+
+
+<br>
+
+<a href="{{ url_for('add_application') }}">
+    Add New Application
+</a>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{% block title %}Job Application Tracker{% endblock %}</title>
+
+    <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <h1>Job Application Tracker</h1>
+
+    <hr>
+
+    {% if session.get('user_id') %}
+
+        <a href="{{ url_for('dashboard') }}">Dashboard</a> |
+        <a href="{{ url_for('applications') }}">Applications</a> |
+        <a href="{{ url_for('add_application') }}">Add Application</a> |
+        <a href="{{ url_for('logout') }}">Logout</a>
+
+        <hr>
+
+    {% endif %}
+
+
+    <!-- Flash Messages -->
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% for category, message in messages %}
+
+            <p>
+                <strong>{{ message }}</strong>
+            </p>
+
+        {% endfor %}
+
+    {% endwith %}
+
+
+    {% block content %}
+
+    {% endblock %}
+
+</body>
+
+</html>

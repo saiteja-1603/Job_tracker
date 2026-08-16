@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit Application
+{% endblock %}
+
+
+{% block content %}
+
+<h2>Edit Application</h2>
+
+
+<form
+    method="POST"
+    action="{{ url_for(
+        'edit_application',
+        application_id=application.id
+    ) }}"
+>
+
+
+    <label>Company Name:</label>
+    <br>
+
+    <input
+        type="text"
+        name="company_name"
+        value="{{ application.company_name }}"
+        required
+    >
+
+    <br><br>
+
+
+    <label>Job Role:</label>
+    <br>
+
+    <input
+        type="text"
+        name="job_role"
+        value="{{ application.job_role }}"
+        required
+    >
+
+    <br><br>
+
+
+    <label>Job Type:</label>
+    <br>
+
+    <select name="job_type">
+
+        <option value="">
+            Select
+        </option>
+
+        {% for type in job_types %}
+
+        <option
+            value="{{ type }}"
+            {% if application.job_type == type %}
+            selected
+            {% endif %}
+        >
+
+            {{ type }}
+
+        </option>
+
+        {% endfor %}
+
+    </select>
+
+    <br><br>
+
+
+    <label>Location:</label>
+    <br>
+
+    <input
+        type="text"
+        name="location"
+        value="{{ application.location or '' }}"
+    >
+
+    <br><br>
+
+
+    <label>Application Date:</label>
+    <br>
+
+    <input
+        type="date"
+        name="application_date"
+        value="{{ application.application_date }}"
+        required
+    >
+
+    <br><br>
+
+
+    <label>Job URL:</label>
+    <br>
+
+    <input
+        type="url"
+        name="job_url"
+        value="{{ application.job_url or '' }}"
+    >
+
+    <br><br>
+
+
+    <label>Status:</label>
+    <br>
+
+    <select name="status">
+
+        {% for status in statuses %}
+
+        <option
+            value="{{ status }}"
+            {% if application.status == status %}
+            selected
+            {% endif %}
+        >
+
+            {{ status }}
+
+        </option>
+
+        {% endfor %}
+
+    </select>
+
+    <br><br>
+
+
+    <label>Notes:</label>
+    <br>
+
+    <textarea
+        name="notes"
+        rows="5"
+        cols="40"
+    >{{ application.notes or '' }}</textarea>
+
+    <br><br>
+
+
+    <button type="submit">
+        Save Changes
+    </button>
+
+
+    <a href="{{ url_for('applications') }}">
+        Cancel
+    </a>
+
+</form>
+
+{% endblock %}

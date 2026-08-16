@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Application
+{% endblock %}
+
+
+{% block content %}
+
+<h2>Add Job Application</h2>
+
+
+<form method="POST">
+
+
+    <label>Company Name:</label>
+    <br>
+
+    <input
+        type="text"
+        name="company_name"
+        required
+    >
+
+    <br><br>
+
+
+    <label>Job Role:</label>
+    <br>
+
+    <input
+        type="text"
+        name="job_role"
+        required
+    >
+
+    <br><br>
+
+
+    <label>Job Type:</label>
+    <br>
+
+    <select name="job_type">
+
+        <option value="">
+            Select
+        </option>
+
+        {% for type in job_types %}
+
+        <option value="{{ type }}">
+            {{ type }}
+        </option>
+
+        {% endfor %}
+
+    </select>
+
+    <br><br>
+
+
+    <label>Location:</label>
+    <br>
+
+    <input
+        type="text"
+        name="location"
+    >
+
+    <br><br>
+
+
+    <label>Application Date:</label>
+    <br>
+
+    <input
+        type="date"
+        name="application_date"
+        required
+    >
+
+    <br><br>
+
+
+    <label>Job URL:</label>
+    <br>
+
+    <input
+        type="url"
+        name="job_url"
+        placeholder="https://example.com"
+    >
+
+    <br><br>
+
+
+    <label>Status:</label>
+    <br>
+
+    <select name="status">
+
+        {% for status in statuses %}
+
+        <option value="{{ status }}">
+
+            {{ status }}
+
+        </option>
+
+        {% endfor %}
+
+    </select>
+
+    <br><br>
+
+
+    <label>Notes:</label>
+    <br>
+
+    <textarea
+        name="notes"
+        rows="5"
+        cols="40"
+    ></textarea>
+
+    <br><br>
+
+
+    <button type="submit">
+        Add Application
+    </button>
+
+
+    <a href="{{ url_for('applications') }}">
+        Cancel
+    </a>
+
+</form>
+
+{% endblock %}
